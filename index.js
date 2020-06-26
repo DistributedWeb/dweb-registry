@@ -10,14 +10,14 @@ function API (opts) {
   if (!opts) opts = {}
   if (!opts.apiPath) opts.apiPath = ''
 
-  // datbase.org defaults, specify opts.server and opts.apiPath to override
-  var SERVER = 'https://datbase.org'
+  // registry.dwebx.net defaults, specify opts.server and opts.apiPath to override
+  var SERVER = 'https://registry.dwebx.net'
   var API_PATH = '/api/v1'
 
-  var apiPath = !opts.server || (opts.server.indexOf('datbase.org') > -1) ? API_PATH : opts.apiPath // only add default path to datbase.org server
+  var apiPath = !opts.server || (opts.server.indexOf('registry.dwebx.net') > -1) ? API_PATH : opts.apiPath // only add default path to registry.dwebx.net server
   var townshipOpts = Object.assign({}, opts)
 
-  // set default township server & routes for datbase.org
+  // set default township server & routes for registry.dwebx.net
   if (!townshipOpts.config) townshipOpts.config = {}
   if (!townshipOpts.config.filename) townshipOpts.config.filename = '.datrc'
   if (!townshipOpts.server) townshipOpts.server = SERVER
@@ -38,7 +38,7 @@ function API (opts) {
     register: township.register.bind(township),
     whoami: township.getLogin.bind(township),
     secureRequest: township.secureRequest.bind(township),
-    dats: rest('/dats'),
+    dwebs: rest('/dwebs'),
     users: xtend(rest('/users'), {
       resetPassword: function (input, cb) {
         nets({ method: 'POST', uri: api + '/password-reset', body: input, json: true }, cb)
